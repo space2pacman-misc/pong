@@ -149,15 +149,16 @@ ball.checkPos = function(coordinate, side) {
 }
 
 ball.checkZone = function() {
-	var fieldHeight = field.height() - ball.height();
 	var fieldWidth = field.width() - ball.width() - bot.width() - 2; // 2px из-за рамки
-	var playerHeight = player.height() * 100 / fieldHeight;
-	var botHeight = bot.height() * 100 / fieldHeight;
+	var playerHeight = player.height() * 100 / field.height();
+	var botHeight = bot.height() * 100 / field.height();
 
 	// Проверка столкновения с платформой player
 	if(ball.pos.y > player.pos.y && ball.pos.y < player.pos.y + playerHeight && ball.pos.x == player.width()) {
 		ball.pos.x = player.width();
 		resolution.x = true;
+		
+		//ball.angel = +((ball.pos.y - player.pos.y) / 10).toFixed();
 	}
 	// Проверка столкновения с платформой bot
 	if(ball.pos.y > bot.pos.y && ball.pos.y < bot.pos.y + botHeight && ball.pos.x == fieldWidth) {
